@@ -1,0 +1,125 @@
+.popup{
+
+    margin-top: 34px;
+    margin-left: 14px;
+    background-color: rgb(196,196,196,196);
+    padding: 20px;
+    width:400px;
+    border: 1px solid;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 28px;
+   
+}
+.name{
+ padding: 10px;
+ margin-left: 20px;
+ font-weight: 600;
+ font-size: 20px;
+
+}
+.box-one{
+    padding: 20px ;
+    
+}
+.save{
+    margin-left: 40px;
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    margin-top: -18px;
+}
+button{
+    border:none;
+    height:30px;
+    width:90px;
+    border-radius: 5px;
+    margin-left: 20px;
+
+}
+input{
+    height:30px;
+    width:300px;
+    border-radius: 5px;
+}
+.input-container{
+    padding:10px;
+    
+}
+.input-label{
+    font-size: 16px;
+}
+.popup-head{
+    display: flex;
+    justify-content: space-between;
+}
+.cancel{
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 850px){
+    input{
+        width: 320px;
+    }
+    
+}
+@media only screen and (max-width: 750px){
+    input{
+        width: 250px;
+    }
+    .popup{
+        width: 300px;  
+  }
+}
+
+
+
+@media only screen and (max-width: 650px){
+
+input{
+    width: 200px
+}
+.popup{
+      width: 280px;  
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @media only screen and (max-width: 500px){
+      .popup{
+        width: 200px;
+        margin-left: -3px;
+      }
+      input{
+        width: 136px;
+      }
+      .save{
+        margin-left: 13px
+      }
+
+} */
+
+
+
+

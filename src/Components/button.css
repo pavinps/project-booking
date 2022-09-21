@@ -1,0 +1,7 @@
+.butn{
+    padding: 5px;
+    width: 92px;
+    height: 40px;
+    display: grid;
+    place-items: centre;
+}

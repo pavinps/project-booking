@@ -1,0 +1,16 @@
+.dropdown-main{
+    border: 1px solid;
+    position: absolute;
+    right: 1px;
+    top: 28px;
+    background-color: rgb(196,196,196);
+
+}
+.dropdown-item{
+    padding: 11px
+}
+.dropdown-item-row{
+    border-bottom: 1px solid;
+    padding: 10px;
+}
+

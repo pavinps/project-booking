@@ -1,0 +1,22 @@
+.check{
+    display: flex;
+    justify-content: space-around;
+   gap:30px;
+   background-color:rgb(196,196,196);
+   padding: 8px;
+}
+.home{
+  
+}
+
+
+
+@media only screen and (max-width: 600px){
+.check{
+    
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+}

@@ -1,0 +1,40 @@
+.box{
+    margin-left: 10px;
+    margin-top: 20px;
+    width: 600px;
+    height: 210px;
+    border-radius: 15px;
+    
+     background-color: white;
+    
+    
+    
+}
+.checkstyle{
+    font-weight: bold;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+
+.box1{
+    
+    overflow-y: scroll;
+    height: 150px;
+  
+   
+}
+.icon{
+    display: flex;
+    padding: 20px;
+}
+
+
+
+
+
+
+
+
+
+
