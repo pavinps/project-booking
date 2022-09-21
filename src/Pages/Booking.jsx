@@ -1,9 +1,9 @@
 import React from 'react'
-import Amen from '../Components/Amen'
+
 import { bookingdata } from '../Components/booking'
 import Bookingtable from '../Components/Bookingtable'
 import Navbar from '../Components/Navbar'
-import Newbooking from '../Components/Newbooking'
+// import Newbooking from '../Components/Newbooking'
 
 
 const Booking = () => {

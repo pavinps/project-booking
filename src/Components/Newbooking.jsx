@@ -9,7 +9,7 @@ const Newbooking = ({title,text}) => {
   const [checkout, setCheckout] = useState('')
   const [adultno, setAdultno] = useState('')
   const [childrenno, setChildrenno] = useState('')
-  const [first, set] = useState([])
+  
   const senddata=(e)=>{
     e.preventDefault()
     console.log(gstlname,gstfname,checkin,checkout,adultno,childrenno);
@@ -31,11 +31,14 @@ const Newbooking = ({title,text}) => {
       <Input title='Check out Date' type='number'setstate={setCheckout}/>
       <Input title='Status' setstate={setAdultno}/>
       <Input  title='Room no' type='number' setstate={setChildrenno}/>
-
+         
       <div className='newbooking-btn' >
       <Button color='white' text='GET AVALIABLE ROOM'back='#d7ae63' padding="10px" wid='182px' hi='40px'/>
       </div>
       </form>
+      <div>
+        
+      </div>
       </div>
     </div>
   )

@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import Input from './Input'
 import './popup.css'
 import Button from  './Button'
+import Amenities from './Amenities'
 const Popup = ({setaddroom}) => {
   const [roomno, setRoomno] = useState('')
   const [adultcapacity, setAdultcapacity] = useState('')
   const [childrencapacity, setChildrencapacity] = useState('')
   const [price, setPrice] = useState('')
+   const [Selectarray, setSelectarray] = useState([])
   const senddata=(e)=>{
 e.preventDefault()
 console.log(roomno,adultcapacity,childrencapacity,price);
@@ -31,6 +33,24 @@ console.log(roomno,adultcapacity,childrencapacity,price);
         </div>
 
         </form>
+        <div className='amen'>Amenities</div>
+        <div>
+        <select className='select' onChange={(e)=>{setSelectarray([...Selectarray,e.target.value])}}>
+          <option>Select</option>
+          <option value="Television">Television</option>
+          <option value="Air-Conditioner">Air Conditioner</option>
+          <option value="internet-access">internet access</option>
+
+         </select>
+         <div>
+        {Selectarray.map((data,index)=>{
+          return(
+            <Amenities select={Selectarray} data={data} key={index} index={index} Selectarray={setSelectarray} />
+            
+          )
+        })}
+      </div>
+      </div>
         </div>
    
    

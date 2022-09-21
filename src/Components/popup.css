@@ -59,6 +59,19 @@ input{
     cursor: pointer;
 }
 
+.amen{
+    font-size: 20px;
+    margin-left: 31px;
+    font-weight: bold;
+}
+.select{
+    margin-left: 31px;
+    width: 370px;
+    border-radius: 10px;
+    height: 30px;
+}
+
+
 
 
 
@@ -69,6 +82,9 @@ input{
     input{
         width: 320px;
     }
+    .select{
+        width: 320;
+    }
     
 }
 @media only screen and (max-width: 750px){
@@ -77,6 +93,9 @@ input{
     }
     .popup{
         width: 300px;  
+  }
+  .select{
+    width: 250px;
   }
 }
 
@@ -89,6 +108,9 @@ input{
 }
 .popup{
       width: 280px;  
+}
+.select{
+    width: 200px;
 }
 }
 
