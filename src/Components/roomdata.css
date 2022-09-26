@@ -19,11 +19,13 @@
     border-radius: 11px;
     height: 304px
 }
-
+.roomdata-databtn{
+    display: flex;
+}
 
 .roomdata-heading{
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr 0fr;
     margin-left: 18px;
     justify-items: center;
     font-weight: bold;
@@ -32,7 +34,7 @@
 }
 .roomdata-data{
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr 0fr;
    
     border: 1px solid rgb(196,196,196,0.2);
     justify-items: center;
@@ -57,7 +59,14 @@
     top: 0;
     left: 0;
 }
-
+.delete_popup {
+    background-color: white;
+    width: 248px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50% );
+}
 
 
 @media only screen and (max-width: 730px)
