@@ -13,16 +13,10 @@ const Popup = ({setaddroom,editid,setEditId,roomData}) => {
     childCapacity:"",
     price:""
   })
-
+ 
   useEffect(()=>{
-    if (editid){
-      
-      setFormData(roomData.find(r=>r.id==editid)) 
-    }
-      
-    
+    setFormData(roomData.find(r=>r.id === editid))
   },[editid])
-
   const {roomNumber,adultCapacity,childCapacity,price }= formData;
   
   const onChange=(value,key)=>{
@@ -35,19 +29,20 @@ const Popup = ({setaddroom,editid,setEditId,roomData}) => {
  
    const [Selectarray, setSelectarray] = useState([])
   const senddata=async(e)=>{
-e.preventDefault()
-console.log(formData);
-let res;
-if (editid) {
-  res=await updateroom()
-  
-}else{
-  res=addRoom()
-}
-  closeWindow();
+    e.preventDefault()
+    console.log(formData);
+    let res;
+    if (editid) {
+      res=await updateroom()
+      
+    }else{
+      console.log("add");
+      res=addRoom()
+    }
+      closeWindow();
   };
   const updateroom=()=>apiCall(`/rooms/${formData.id}`,"PUT",formData)
-  const addRoom=()=>("/rooms","POST",formData)
+  const addRoom=()=>apiCall("/rooms","POST",formData)
   const closeWindow =()=>{
     setaddroom(false);
     setEditId(null);

@@ -1,0 +1,11 @@
+{
+  "rooms": [
+    {
+      "roomNumber": "303",
+      "adultCapacity": "2",
+      "childCapacity": "3",
+      "price": "2",
+      "id": 1
+    }
+  ]
+}
