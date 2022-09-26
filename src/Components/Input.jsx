@@ -1,6 +1,6 @@
 import React from 'react'
 import './input.css'
-const Input = ({title,setstate,type,holder}) => {
+const Input = ({title,setstate,type,holder,value}) => {
   return (
     <div className='input-container'>
        <div className='input-label'> <label htmlFor="">
@@ -8,7 +8,7 @@ const Input = ({title,setstate,type,holder}) => {
         </label>
         </div>
         <div className='input-text'>
-        <input type={type} placeholder={holder} onChange={(e)=>{setstate(e.target.value)}} required />
+        <input type={type} placeholder={holder} value={value} onChange={(e)=>{setstate(e.target.value)}} required />
         </div>
 
     </div>

@@ -23,7 +23,7 @@
 
 .roomdata-heading{
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
     margin-left: 18px;
     justify-items: center;
     font-weight: bold;
@@ -32,7 +32,7 @@
 }
 .roomdata-data{
     display: grid;
-    grid-template-columns: 2fr 2fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
    
     border: 1px solid rgb(196,196,196,0.2);
     justify-items: center;
@@ -60,17 +60,20 @@
 
 
 
-@media only screen and (max-width: 600px)
+@media only screen and (max-width: 730px)
 {
     .roomdata-heading,.roomdata-data{
-        font-size: 15px;
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
     }
     .roomdata-table{
         margin-right: 90px;
         margin-left: 44px;
     }
-}
+
 
 @media only screen and (max-width: 450px){
     /* .roomdata-heading,.roomdata-data{

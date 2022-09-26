@@ -2,7 +2,6 @@ import React from 'react'
 import Navbar from '../Components/Navbar'
 import Popup from '../Components/Popup'
 import Roomdata from '../Components/Roomdata'
-import { roomdata } from '../Components/Tabledata'
 
 
 const Room = () => {
@@ -11,7 +10,7 @@ const Room = () => {
      <div>
       <Navbar/>
      </div>
-    <Roomdata btn_text='Add Room' data={roomdata}/>
+    <Roomdata btn_text='Add Room' />
     <div>
       
     </div>

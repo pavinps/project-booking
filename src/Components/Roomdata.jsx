@@ -2,8 +2,20 @@ import React, { useState } from 'react'
 import "./roomdata.css"
 import Button from './Button'
 import Popup from './Popup'
-const Roomdata = ({btn_text,data}) => {
+import { useEffect } from 'react'
+import apiCall from '../serivce/apiCall'
+const Roomdata = ({btn_text}) => {
+    const [roomData, setRoomData] = useState([])
     const [addroom, setaddroom] = useState(false)
+    const [editid, setEditId] = useState(null)
+    useEffect(()=>{
+        apiCall("/rooms","GET")
+       
+        .then(respones=>{
+            setRoomData(respones);
+            console.log(roomData);
+        })
+    },[setaddroom])
  function popuproom() {
     console.log(setaddroom);
     setaddroom(true);
@@ -36,21 +48,25 @@ const Roomdata = ({btn_text,data}) => {
                 
             </div>
             <div className='roomdata-row'>
-                    {data.map((data,index)=>{
+                    {roomData?.map((data,index)=>{
                         return(
-                            <div className='roomdata-data'>
-                             <div>{data.no}</div>
-                            <div>{data.ac}</div>
-                            <div>{data.cc}</div>
+                            <div className='roomdata-data' key={data.id}>
+                             <div>{data.roomNumber}</div>
+                            <div>{data.adultCapacity}</div>
+                            <div>{data.childCapacity}</div>
                             <div>{data.price}</div>
-                            
+                            <svg  onClick={()=>{
+                                setaddroom(true);
+                                setEditId(data.id);
+                 
+                            }} height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"><path d="M64 360c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zm0-160c30.9 0 56 25.1 56 56s-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56zM120 96c0 30.9-25.1 56-56 56S8 126.9 8 96S33.1 40 64 40s56 25.1 56 56z"/></svg>
                             </div>
                            
                         )
                     })}
                 </div>
 <div className={addroom ? "popwindow":"" }>
-    {addroom && <Popup setaddroom={setaddroom}/>}
+    {addroom && <Popup setaddroom={setaddroom} editid={editid} setEditId={setEditId} roomData={roomData} />}
 </div>
         </div>
     </div>

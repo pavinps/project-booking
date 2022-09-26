@@ -4,9 +4,9 @@
 .newbooking-box{
     margin-left: 20px;
     padding: 32px;
-    border: 1px solid;
-    width: 417px;
-    height: 548px;
+   border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
     background-color: white;
     margin-top: 20px;
 }
@@ -24,6 +24,9 @@
     height: 964px;
     background-color: rgb(196,196,196,196);
     margin-top: 0px;
+    position: absolute;
+    display: grid;
+    align-items: center;
 }
 
 @media only screen and (max-width: 850px){

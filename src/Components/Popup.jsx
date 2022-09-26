@@ -3,17 +3,56 @@ import Input from './Input'
 import './popup.css'
 import Button from  './Button'
 import Amenities from './Amenities'
-const Popup = ({setaddroom}) => {
-  const [roomno, setRoomno] = useState('')
-  const [adultcapacity, setAdultcapacity] = useState('')
-  const [childrencapacity, setChildrencapacity] = useState('')
-  const [price, setPrice] = useState('')
-   const [Selectarray, setSelectarray] = useState([])
-  const senddata=(e)=>{
-e.preventDefault()
-console.log(roomno,adultcapacity,childrencapacity,price);
-  }
+import apiCall from '../serivce/apiCall'
+import { useEffect } from 'react'
+
+const Popup = ({setaddroom,editid,setEditId,roomData}) => {
+  const [formData, setFormData] = useState({
+    roomNumber:"",
+    adultCapacity:"",
+    childCapacity:"",
+    price:""
+  })
+
+  useEffect(()=>{
+    if (editid){
+      
+      setFormData(roomData.find(r=>r.id==editid)) 
+    }
+      
+    
+  },[editid])
+
+  const {roomNumber,adultCapacity,childCapacity,price }= formData;
   
+  const onChange=(value,key)=>{
+    setFormData({
+      ...formData,
+      [key]:value
+    })
+
+  }
+ 
+   const [Selectarray, setSelectarray] = useState([])
+  const senddata=async(e)=>{
+e.preventDefault()
+console.log(formData);
+let res;
+if (editid) {
+  res=await updateroom()
+  
+}else{
+  res=addRoom()
+}
+  closeWindow();
+  };
+  const updateroom=()=>apiCall(`/rooms/${formData.id}`,"PUT",formData)
+  const addRoom=()=>("/rooms","POST",formData)
+  const closeWindow =()=>{
+    setaddroom(false);
+    setEditId(null);
+    
+  }
   return (
     <div className='popup' >
       <div className='popup-head'>
@@ -22,10 +61,10 @@ console.log(roomno,adultcapacity,childrencapacity,price);
         </div>
        <form action="" onSubmit={senddata}>
         <div className='box-one'>
-        <Input title="Room no" type='number' setstate={setRoomno}/>
-        <Input title="Adult capacity"  type='number' setstate={setAdultcapacity}/>
-        <Input title="Children capacity"  type='number' setstate={setChildrencapacity}/>
-        <Input title="Price"  type='number'setstate={setPrice}/>
+        <Input title="Room no" type='number' setstate={v=>onChange(v,"roomNumber")} value={roomNumber}/>
+        <Input title="Adult capacity"  type='number' setstate={v=>onChange(v,"adultCapacity")} value={adultCapacity}/>
+        <Input title="Children capacity"  type='number'setstate={v=>onChange(v,"childCapacity")} value={childCapacity}/>
+        <Input title="Price"  type='number'setstate={v=>onChange(v,"price")} value={price}/>
         </div>
         <div className='save'>
         <Button color='white' text='save'back='#d7ae63' padding="10px" wid='92px' hi='40px'/>
@@ -33,8 +72,9 @@ console.log(roomno,adultcapacity,childrencapacity,price);
         </div>
 
         </form>
-        <div className='amen'>Amenities</div>
-        <div>
+        {editid &&
+        <div className='amen'>
+        <div>Amenities</div>
         <select className='select' onChange={(e)=>{setSelectarray([...Selectarray,e.target.value])}}>
           <option>Select</option>
           <option value="Television">Television</option>
@@ -51,6 +91,7 @@ console.log(roomno,adultcapacity,childrencapacity,price);
         })}
       </div>
       </div>
+}
         </div>
    
    
