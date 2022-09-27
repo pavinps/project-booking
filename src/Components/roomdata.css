@@ -17,7 +17,7 @@
     margin-top: 15px;
     background-color: white;
     border-radius: 11px;
-    height: 304px
+    height: fit-content;
 }
 .roomdata-databtn{
     display: flex;
@@ -45,7 +45,7 @@
 .roomdata-row{
 
     overflow-y: scroll;
-    height: 183px;
+    height: fit-content;
 }
 .roomdata-main{
     background-color: rgb(196,196,196,196);
@@ -61,13 +61,22 @@
 }
 .delete_popup {
     background-color: white;
-    width: 248px;
+  
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50% );
+    border-radius: 12px;
+    border: 1px solid;
+    padding: 20px;
 }
 
+.delete_text{
+    
+}
+.deletebtn{
+    border: 1px  #d7ae63;
+}
 
 @media only screen and (max-width: 730px)
 {

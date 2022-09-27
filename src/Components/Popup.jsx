@@ -6,21 +6,22 @@ import Amenities from './Amenities'
 import apiCall from '../serivce/apiCall'
 import { useEffect } from 'react'
 
-const Popup = ({ setaddroom, editid, setEditId, roomData }) => {
+const Popup = ({ setaddroom, editid, setEditId, roomData, deleteid,addroom }) => {
   const [formData, setFormData] = useState({
     roomNumber: "",
     adultCapacity: "",
     childCapacity: "",
-    price: ""
+    price: "",
+    amenities:[]
   })
 
   useEffect(() => {
     console.log(editid);
     if(editid)setFormData(roomData.find(r => r.id === editid))
    
-  }, [editid])
+  }, [editid,deleteid,addroom])
   
-  const { roomNumber, adultCapacity, childCapacity, price } = formData;
+  const { roomNumber, adultCapacity, childCapacity, price,amenities } = formData;
 
   const onChange = (value, key) => {
     setFormData({
@@ -30,7 +31,7 @@ const Popup = ({ setaddroom, editid, setEditId, roomData }) => {
 
   }
 
-  const [Selectarray, setSelectarray] = useState([])
+ 
   const senddata = async (e) => {
     e.preventDefault()
 
@@ -50,6 +51,11 @@ const Popup = ({ setaddroom, editid, setEditId, roomData }) => {
   const closeWindow = () => {
     setEditId(null);
     setaddroom(false);
+
+  }
+  const addAmenities=(value)=>{
+    if (value && !amenities.includes(value))
+    onChange([...amenities,value],"amenities")
 
   }
   return (
@@ -74,17 +80,17 @@ const Popup = ({ setaddroom, editid, setEditId, roomData }) => {
       {editid &&
         <div className='amen'>
           <div>Amenities</div>
-          <select className='select' onChange={(e) => { setSelectarray([...Selectarray, e.target.value]) }}>
-            <option>Select</option>
+          <select className='select' onChange={(e)=>{ addAmenities(e.target.value) }}>
+            <option value=''>Select</option>
             <option value="Television">Television</option>
             <option value="Air-Conditioner">Air Conditioner</option>
             <option value="internet-access">internet access</option>
 
           </select>
           <div>
-            {Selectarray.map((data, index) => {
+            {amenities.map((data, index) => {
               return (
-                <Amenities select={Selectarray} data={data} key={index} index={index} Selectarray={setSelectarray} />
+                <Amenities  data={data} key={index} index={index} amenities={amenities} setSelect={(value)=>onChange(value,"amenities")} />
 
               )
             })}

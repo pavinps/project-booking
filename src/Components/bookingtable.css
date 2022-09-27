@@ -53,9 +53,10 @@
 
 }
 input{
-    width: 359px;
+    width: 325px;
     height: 30px;
-    border-radius: 18px
+    border-radius: 18px;
+    padding-left: 12px;
 }
 
 @media only screen and (min-width: 1115px){

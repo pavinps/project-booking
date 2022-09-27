@@ -17,7 +17,7 @@ const Roomdata = ({ btn_text }) => {
                 setRoomData(respones);
                 console.log(roomData);
             })
-    }, [setaddroom])
+    }, [setaddroom,addroom,editid,deleteid])
     function popuproom() {
         console.log(setaddroom);
         setaddroom(true);
@@ -79,14 +79,14 @@ const Roomdata = ({ btn_text }) => {
                 </div>
 
                 <div className={addroom || deleteid ? "popwindow" : ""}>
-                    {addroom && <Popup setaddroom={setaddroom} editid={editid} setEditId={setEditId} roomData={roomData} />}
+                    {addroom && <Popup setaddroom={setaddroom} editid={editid} setEditId={setEditId} roomData={roomData} deleteid={deleteid} />}
                     {
                         deleteid && 
                         
                         <div className="delete_popup">
-                            <div className="delete_text"><h3>are you sure</h3></div>
+                            <div className="delete_text"><h3>Are You Sure Wanted to Delete</h3></div>
                             <div className="delete_buttons">
-                                <button onClick={deleteroom}>Delete</button>
+                                <button  onClick={deleteroom}>Delete</button>
                                 <button onClick={()=>{setdeleteid(null)}}>close</button>
                             </div>
                         
