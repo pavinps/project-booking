@@ -10,6 +10,7 @@ const Newbooking = ({title,text}) => {
   const [adultno, setAdultno] = useState('')
   const [childrenno, setChildrenno] = useState('')
   const [book, setbook] = useState(false)
+  const [Check, setCheck] = useState(false)
   
   const senddata=(e)=>{
     e.preventDefault()
@@ -34,12 +35,30 @@ const Newbooking = ({title,text}) => {
       <Input  title='Room no' type='number' setstate={setChildrenno}/>
          
       <div className='newbooking-btn' >
-      <div><Button color='white' text='GET AVALIABLE ROOM'back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={()=>{setbook(!book)}}/></div>
+      <div className='newbooking-btn-booking'><Button color='white' text='GET AVALIABLE ROOM'back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={()=>{setbook(!book)}}/></div>
     {
-      book && <div><Button color='white' text='BOOKING'back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={()=>{setbook(!book)}}/></div>
+      book && <div className='newbooking-btn-booking'><Button color='white' text='BOOKING'back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={()=>{setbook(!book)}}/></div>
     }
-      
-      </div>
+     {
+      book && <div><Button color='#d7ae63' text='Back'padding="10px" wid='182px' hi='40px' funtionality={()=>{setCheck(!Check)}}/></div>
+    }
+     </div>
+
+     <div className='newbooking-btn2'>
+     {
+      Check && <div><Button color='white' text='Check In'padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{setCheck(!Check)}}/></div>
+    }
+
+{
+      Check && <div><Button color='white' text='Check OuT'padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{setCheck(!Check)}}/></div>
+    }
+
+{
+      Check && <div><Button color='white' text='cancel
+      'padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{setCheck(!Check)}}/></div>
+    }
+
+     </div>
       </form>
       <div>
         

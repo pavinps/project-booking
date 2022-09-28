@@ -1,15 +1,5 @@
 {
-  "rooms": [
-    {
-      "roomNumber": "123",
-      "adultCapacity": "2",
-      "childCapacity": "2",
-      "price": "2000",
-      "amenities": [
-        "Air-Conditioner",
-        "internet-access"
-      ],
-      "id": 1
-    }
+  "booking": [
+   
   ]
 }

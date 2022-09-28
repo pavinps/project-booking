@@ -19,7 +19,7 @@ const Popup = ({ setaddroom, editid, setEditId, roomData, deleteid,addroom }) =>
     console.log(editid);
     if(editid)setFormData(roomData.find(r => r.id === editid))
    
-  }, [editid,deleteid,addroom])
+  }, [editid])
   
   const { roomNumber, adultCapacity, childCapacity, price,amenities } = formData;
 
@@ -38,6 +38,7 @@ const Popup = ({ setaddroom, editid, setEditId, roomData, deleteid,addroom }) =>
     let res;
     if (editid) {
       res = await updateroom()
+      closeWindow()
 
     } else {
       // console.log("add");
@@ -54,8 +55,8 @@ const Popup = ({ setaddroom, editid, setEditId, roomData, deleteid,addroom }) =>
 
   }
   const addAmenities=(value)=>{
-    if (value && !amenities.includes(value))
-    onChange([...amenities,value],"amenities")
+    if (value && !amenities.map(a=>a.text).includes(value))
+    onChange([...amenities,{text:value}],"amenities")
 
   }
   return (
@@ -72,7 +73,7 @@ const Popup = ({ setaddroom, editid, setEditId, roomData, deleteid,addroom }) =>
           <Input title="Price" type='number' setstate={v => onChange(v, "price")} value={price} />
         </div>
         <div className='save'>
-          <Button color='white' text='save' back='#d7ae63' padding="10px" wid='92px' hi='40px' />
+          <Button color='white' text='save' back='#d7ae63' padding="10px" wid='92px' hi='40px'/>
 
         </div>
 
@@ -90,13 +91,13 @@ const Popup = ({ setaddroom, editid, setEditId, roomData, deleteid,addroom }) =>
           <div>
             {amenities.map((data, index) => {
               return (
-                <Amenities  data={data} key={index} index={index} amenities={amenities} setSelect={(value)=>onChange(value,"amenities")} />
+                <Amenities  data={data.text} key={index} index={index} amenities={amenities} setSelect={(value)=>onChange(value,"amenities")} />
 
               )
             })}
           </div>
         </div>
-      }
+      } 
     </div>
 
 
