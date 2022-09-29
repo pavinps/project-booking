@@ -3,13 +3,27 @@ import Button from './Button'
 import'./bookingtable.css'
 import Newbooking from './Newbooking'
 import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
+import apiCall from '../serivce/apiCall';
 
 
 const Bookingtable = ({data}) => {
+  const [Bookdata, setBookdata] = useState([])
+
   const [booking, setBooking] = useState(false)
   // function poproom() {
   //   console.log(setBooking);
   //   setBooking(true);}
+  useEffect(() => {
+    apiCall("/booking", "GET")
+
+        .then(respones => {
+            setBookdata(respones);
+            console.log(Bookdata);
+        })
+}, [])
+
+  
 
   return (
     <div className='booking-main'>
@@ -38,14 +52,14 @@ const Bookingtable = ({data}) => {
                       </div>
                     <div className='booking-table-row'>
                      {
-                      data.map((data,index)=>{
+                      Bookdata.map((data,index)=>{
                         return(
                           <div className='booking-row-data'>
-                            <div className='row'>{data.lname}</div>
-                            <div className='row'>{data.fname}</div>
-                            <div className='row'>{data.rno}</div>
-                            <div className='row'>{data.checkin}</div>
-                            <div className='row'>{data.checkout}</div>
+                            <div className='row'>{data.guestFirstName}</div>
+                            <div className='row'>{data.guestLastName}</div>
+                            <div className='row'>{data.roomNumber}</div>
+                            <div className='row'>{data.checkInDate}</div>
+                            <div className='row'>{data.checkOutDate}</div>
                             <div className='row'>{data.status}</div>
                               
 

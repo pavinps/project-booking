@@ -1,5 +1,5 @@
 const apiCall=async( url,method,data)=>{
-   const response= await fetch(`https://localhost:7227${url}`,{
+   const response= await fetch(`http://localhost:5093${url}`,{
         method,
         headers:{
           "Content-Type":"application/json"

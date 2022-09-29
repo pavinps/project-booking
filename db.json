@@ -1,5 +1,11 @@
 {
-  "booking": [
-   
+  "book": [
+    {
+      "guestFirstName": "athul",
+      "guestLastName": "p",
+      "checkInDate": "2022-09-30",
+      "checkOutDate": "2022-10-08",
+      "id": 1
+    }
   ]
 }
