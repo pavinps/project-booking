@@ -2,31 +2,53 @@ import React, { useState } from 'react'
 import Input from './Input'
 import Button from './Button'
 import './newbooking.css'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import apiCall from '../serivce/apiCall'
+import { Navigate, useNavigate } from 'react-router-dom'
 const Newbooking = ({ title, text }) => {
 
   const [bookData, setBookData] = useState({
 
     guestFirstName: "",
     guestLastName: "",
-    checkInData: "",
-    checkOutData: "",
+    checkInDate: "",
+    checkOutDate: "",
     numberOfAdults: "",
     numberOfChild: "",
     
 
   })
+  const Navigate=useNavigate()
+  const getAvailable=async()=>{
+    let room =await getRooms();
+    if(room.id){
+      setRoom(room);
+      console.log(room);
+      setGetavailbleroom(true)
+    }
+  }
+  const book=async()=>{
+    const booking=await addBooking();
+    console.log(booking);
+    setBookNow(true);
+
+  }
+function backclick(){
+  Navigate(-1);
+}
 
 
-
-  const [book, setbook] = useState(false)
+  // const [Book, setBook] = useState(false)
   const [Check, setCheck] = useState(false)
+  const [Getavailbleroom, setGetavailbleroom] = useState(false)
+  const [room, setRoom] = useState(null)
 
 
 
-  const { guestFirstName, guestLastName, checkInDate, checkOutDate, status, roomNumber,numberOfAdults,numberOfChild } = bookData
+  const { guestFirstName, guestLastName, checkInDate, checkOutDate,numberOfAdults,numberOfChild } = bookData
   const onChange = (value, key) => {
+    // console.log(value,key);
+    if (room) return
     setBookData({
       ...bookData,
       [key]: value
@@ -34,28 +56,32 @@ const Newbooking = ({ title, text }) => {
 
   }
 
-  const senddata = (e) => {
-    e.preventDefault()
-    let res = addbook();
+  // const senddata = (e) => {
+  //   e.preventDefault()
+  //   let res = addBooking();
 
-    console.log(bookData);
+  //   console.log(bookData);
+
+  // }
+  const formatbooking=()=>{
+    return{
+  ...bookData,
+  checkOutDate: new Date(bookData.checkOutDate).toISOString(),
+  checkInDate: new Date(bookData.checkInDate).toISOString(),
+    }
+
 
   }
-  const addbook = () => apiCall("/booking", "POST",{
-  ...bookData,
-  checkOutDate: new Date(bookData.checkOutData).toISOString(),
-  checkInDate: new Date(bookData.checkInData).toISOString(),
-  room:undefined,
-  roomId:1
+  const addBooking=()=>apiCall("/booking","POST",{...formatbooking(),roomId:room.id,status:"Booked"})
+  const getRooms=()=>apiCall("/get-rooms","POST",formatbooking())
+  const [BookNow, setBookNow] = useState(false)
 
-
-  })
 
   return (
     <div className='newbooking-main'>
 
       <div className='newbooking-box'>
-        <form action="" onSubmit={senddata}>
+       
           <div className='newbooking-heading'>
             <div>
               New Booking
@@ -70,31 +96,31 @@ const Newbooking = ({ title, text }) => {
           <Input title='ChildCapacity' type='number'  setstate={v => onChange(v, "numberOfChild")} value={numberOfChild} />
 
           <div className='newbooking-btn' >
-            <div className='newbooking-btn-booking'><Button color='white' text='GET AVALIABLE ROOM' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={() => { setbook(!book) }} /></div>
+            <div className='newbooking-btn-booking'><Button color='white' text='GET AVALIABLE ROOM' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={getAvailable} /></div>
             {
-              book && <div className='newbooking-btn-booking'><Button color='white' text='BOOKING' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={() => { setbook(!book) }} /></div>
-            }
-            {
-              book && <div><Button color='#d7ae63' text='Back' padding="10px" wid='182px' hi='40px' funtionality={() => { setCheck(!Check) }} /></div>
+             Getavailbleroom  && <div className='newbooking-btn-1'> <div className='newbooking-btn-booking'><Button color='white' text='BOOKING' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={book} /></div>
+            
+            <div><Button color='#d7ae63' text='Back' padding="10px" wid='182px' hi='40px' funtionality={backclick} /></div>
+           </div>
             }
           </div>
 
           <div className='newbooking-btn2'>
             {
-              Check && <div><Button color='white' text='Check In' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
-            }
+              BookNow && <div className='newbooking-btn2-2'><div><Button color='white' text='Check In' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
+            
 
-            {
-              Check && <div><Button color='white' text='Check OuT' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
-            }
+            
+              <div><Button color='white' text='Check OuT' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
+            
 
-            {
-              Check && <div><Button color='white' text='cancel
+            
+              <div><Button color='white' text='cancel
       'padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
-            }
+          </div>  }
 
           </div>
-        </form>
+        
         <div>
 
         </div>

@@ -22,7 +22,7 @@
     /* padding: 31px; */
     border: 1px solid;
     width: 100%;
-    height: 664px;
+    height: fit-content;
     background-color: rgb(196,196,196,196);
     margin-top: 0px;
     position: absolute;
@@ -38,6 +38,14 @@
     margin-left: 11px;
     display: flex;
     
+}
+.newbooking-btn-1{
+    display: flex;
+
+}
+.newbooking-btn2-2{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 
@@ -79,12 +87,20 @@
     .newbooking-box{
         width: 300px;  
   }
-  .newbooking-btn{
+  .newbooking-btn-1{
+    display: flex;
+
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+.newbooking-btn2-2{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+
     
 }
+
 }
 
 
