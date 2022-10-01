@@ -86,7 +86,7 @@ input{
         font-size: 14px;
     }
     .booking-main {
-        height: fit-content;}
+        height: 600px;}
         .row{
             border: none;
         }
@@ -97,6 +97,16 @@ input{
     border-bottom: 1px solid rgb(196,196,196,196);
         }
 }
-
+@media only screen and (max-width: 600px){
+    input{
+        width: 50px;
+    }
+}
+@media only screen and (max-width: 580px){
+    
+}.booking-item {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 

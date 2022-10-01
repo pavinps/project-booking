@@ -19,17 +19,19 @@ const Newbooking = ({ title, text }) => {
 
   })
   const Navigate=useNavigate()
+  const [Booking, setBooking] = useState(null);
   const getAvailable=async()=>{
     let room =await getRooms();
     if(room.id){
       setRoom(room);
       console.log(room);
       setGetavailbleroom(true)
+      setShowRoom(true)
     }
   }
   const book=async()=>{
     const booking=await addBooking();
-    console.log(booking);
+    setBooking(booking)
     setBookNow(true);
 
   }
@@ -42,6 +44,9 @@ function backclick(){
   const [Check, setCheck] = useState(false)
   const [Getavailbleroom, setGetavailbleroom] = useState(false)
   const [room, setRoom] = useState(null)
+  const [ShowRoom, setShowRoom] = useState(false)
+  
+
 
 
 
@@ -74,6 +79,8 @@ function backclick(){
   }
   const addBooking=()=>apiCall("/booking","POST",{...formatbooking(),roomId:room.id,status:"Booked"})
   const getRooms=()=>apiCall("/get-rooms","POST",formatbooking())
+  const updateStatus = (status)=>apiCall("/booking","PUT",{id:Booking.id,status})
+
   const [BookNow, setBookNow] = useState(false)
 
 
@@ -94,7 +101,7 @@ function backclick(){
           <Input title='Check out Date' type='date' setstate={v => onChange(v, "checkOutDate")} value={checkOutDate} />
           <Input title='Adult Capacity' type='number'  setstate={v => onChange(v, "numberOfAdults")} value={numberOfAdults}/>
           <Input title='ChildCapacity' type='number'  setstate={v => onChange(v, "numberOfChild")} value={numberOfChild} />
-
+            {ShowRoom && <div className='newbooking-label'><label>RoomNumber:</label>{room.roomNumber}<label> Price:</label>{room.price}</div>}
           <div className='newbooking-btn' >
             <div className='newbooking-btn-booking'><Button color='white' text='GET AVALIABLE ROOM' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={getAvailable} /></div>
             {
@@ -107,11 +114,11 @@ function backclick(){
 
           <div className='newbooking-btn2'>
             {
-              BookNow && <div className='newbooking-btn2-2'><div><Button color='white' text='Check In' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
+              BookNow && <div className='newbooking-btn2-2'><div><Button color='white' text='Check In' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{updateStatus("CheckIn")}} /></div>
             
 
             
-              <div><Button color='white' text='Check OuT' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
+              <div><Button color='white' text='Check OuT' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{updateStatus("CheckOut")}}/></div>
             
 
             

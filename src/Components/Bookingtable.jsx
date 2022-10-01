@@ -57,7 +57,7 @@ const Bookingtable = ({data}) => {
                           <div className='booking-row-data'>
                             <div className='row'>{data.guestFirstName}</div>
                             <div className='row'>{data.guestLastName}</div>
-                            <div className='row'>{data.roomNumber}</div>
+                            <div className='row'>{data.room.roomNumber}</div>
                             <div className='row'>{data.checkInDate}</div>
                             <div className='row'>{data.checkOutDate}</div>
                             <div className='row'>{data.status}</div>
