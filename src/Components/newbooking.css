@@ -35,7 +35,7 @@
 }
 .newbooking-btn2{
     margin-top: 14px;
-    margin-left: 11px;
+    margin-left: -5px;
     display: flex;
     
 }
@@ -77,6 +77,13 @@
     input{
         width: 320px;
     }
+    .newbooking-btn-1{
+        display: flex;
+    
+        flex-wrap: wrap;
+        gap: 20px;
+    
+    }
     
 }
 @media only screen and (max-width: 750px){
@@ -90,7 +97,7 @@
     .newbooking-box{
         width: 300px;  
   }
-  .newbooking-btn-1{
+  .newbooking-btn{
     display: flex;
 
     flex-wrap: wrap;
@@ -100,6 +107,7 @@
 .newbooking-btn2-2{
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
 
     
 }
@@ -111,7 +119,7 @@
 @media only screen and (max-width: 650px){
     .newbooking-main{
         height: fit-content;
-        width: 386px;
+        width: 100%;
     }
 
 input{

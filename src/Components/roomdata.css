@@ -86,12 +86,11 @@
     align-items: center;
 }
 
+    
+    .roomdata-main{
+        height: fit-content;
     }
-    .roomdata-table{
-        margin-right: 90px;
-        margin-left: 44px;
-    }
-
+}
 
 @media only screen and (max-width: 450px){
     /* .roomdata-heading,.roomdata-data{

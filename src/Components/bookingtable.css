@@ -19,14 +19,14 @@
 .booking-row-data{
     display: grid;
     grid-template-columns: repeat(6,1fr);
-    padding: 10px;
+    padding: 13px;
 }
 .booking-table{
     margin-left: 20px;
     margin-right: 20px;
     border: 1px solid;
     border-radius: 10px;
-   
+   height: fit-content;
     padding: 16px;
     margin-top: 20px;
     background-color: white;
@@ -61,10 +61,10 @@ input{
     padding-left: 12px;
 }
 
-@media only screen and (min-width: 1115px){
+@media only screen and (min-width: 1250px){
     .booking-table-row{
        overflow-y: scroll;
-       height: 221px;
+       height: fit-content;
     }
    
 }
@@ -96,10 +96,16 @@ input{
     align-items: center;
     border-bottom: 1px solid rgb(196,196,196,196);
         }
+        .booking-main{
+            height: fit-content;
+        }
 }
 @media only screen and (max-width: 600px){
     input{
         width: 50px;
+    }
+    .booking-main{
+        height: fit-content;
     }
 }
 @media only screen and (max-width: 580px){

@@ -4,7 +4,8 @@ import Button from './Button'
 import './newbooking.css'
 // import { useEffect } from 'react'
 import apiCall from '../serivce/apiCall'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 const Newbooking = ({ title, text }) => {
 
   const [bookData, setBookData] = useState({
@@ -18,6 +19,9 @@ const Newbooking = ({ title, text }) => {
     
 
   })
+  const {id} =useParams();
+const [status, setStatus] = useState();
+  const [room, setRoom] = useState(null)
   const Navigate=useNavigate()
   const [Booking, setBooking] = useState(null);
   const getAvailable=async()=>{
@@ -29,9 +33,43 @@ const Newbooking = ({ title, text }) => {
       setShowRoom(true)
     }
   }
+  const changeStatus = async(status)=>{
+    await updateStatus(Booking.id,status);
+    setStatus(status)
+  }
+
+
+
+   useEffect(() => {
+     if (!id)
+      
+    getBookingdata();
+   
+     
+   }, [id]);
+   
+   const getBookingdata =async()=>{
+    const data =await apiCall(`/booking/${id}`);
+    if(data){
+      setBookData({
+        ...data,
+        checkInDate:data.checkInDate.split("T")[0],
+        checkOutDate:data.checkOutDate.split("T")[0]
+      })
+      setRoom(data.room)
+      setStatus(data.status)
+      setBooking(data)
+    }
+   }
+
+
+
+
+
   const book=async()=>{
     const booking=await addBooking();
     setBooking(booking)
+    setStatus("Booked")
     setBookNow(true);
 
   }
@@ -43,7 +81,7 @@ function backclick(){
   // const [Book, setBook] = useState(false)
   const [Check, setCheck] = useState(false)
   const [Getavailbleroom, setGetavailbleroom] = useState(false)
-  const [room, setRoom] = useState(null)
+  
   const [ShowRoom, setShowRoom] = useState(false)
   
 
@@ -103,9 +141,9 @@ function backclick(){
           <Input title='ChildCapacity' type='number'  setstate={v => onChange(v, "numberOfChild")} value={numberOfChild} />
             {ShowRoom && <div className='newbooking-label'><label>RoomNumber:</label>{room.roomNumber}<label> Price:</label>{room.price}</div>}
           <div className='newbooking-btn' >
-            <div className='newbooking-btn-booking'><Button color='white' text='GET AVALIABLE ROOM' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={getAvailable} /></div>
+            <div className='newbooking-btn-booking'><Button color='white' text='GET AVALIABLE ROOM' disabled={room}  back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={getAvailable} /></div>
             {
-             Getavailbleroom  && <div className='newbooking-btn-1'> <div className='newbooking-btn-booking'><Button color='white' text='BOOKING' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={book} /></div>
+             Getavailbleroom  && <div className='newbooking-btn-1'> <div className='newbooking-btn-booking'><Button disabled={status} color='white' text='BOOKING' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={book} /></div>
             
             <div><Button color='#d7ae63' text='Back' padding="10px" wid='182px' hi='40px' funtionality={backclick} /></div>
            </div>
@@ -114,16 +152,16 @@ function backclick(){
 
           <div className='newbooking-btn2'>
             {
-              BookNow && <div className='newbooking-btn2-2'><div><Button color='white' text='Check In' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{updateStatus("CheckIn")}} /></div>
+              BookNow && <div className='newbooking-btn2-2'><div><Button disabled={status !== "Booked"} color='white' text='Check In' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{updateStatus("CheckIn")}} /></div>
             
 
             
-              <div><Button color='white' text='Check OuT' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{updateStatus("CheckOut")}}/></div>
+              <div><Button color='white'disabled={status !== "Check In"} text='Check Out' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{updateStatus("CheckOut")}}/></div>
             
 
             
-              <div><Button color='white' text='cancel
-      'padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
+              <div><Button color='white' disabled={status !== "Booked"} text='cancel
+      ' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
           </div>  }
 
           </div>
