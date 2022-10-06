@@ -5,13 +5,11 @@ import './footerdata.css'
    
   return (
     <div className='data'>
-        <div className='user'>
-            <div>{data.name}</div>
-            <div>{data.date}</div>
-        </div>
-        <div className='id'>
-            <div>{data.id}</div>
-        </div>
+        
+            <label>{data.guestFirstName+" "+data.guestLastName}</label>
+           <label> {data.room.roomNumber}</label>
+        
+        
         <div className='btn'>
             <div>
                 <Button color='white' text={btn_text}back='#d7ae63' padding="10px" wid='92px' hi='40px'/>

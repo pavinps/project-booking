@@ -5,15 +5,18 @@ import Newbooking from './Newbooking'
 import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import apiCall from '../serivce/apiCall';
+import { updateStatus } from '../serivce/api'
+import Databooking from './Databooking';
 
-
-const Bookingtable = ({data}) => {
+const Bookingtable = () => {
   const [Bookdata, setBookdata] = useState([])
+  
 
   const [booking, setBooking] = useState(false)
   // function poproom() {
   //   console.log(setBooking);
   //   setBooking(true);}
+  
   useEffect(() => {
     apiCall("/booking", "GET")
 
@@ -54,24 +57,14 @@ const Bookingtable = ({data}) => {
                      {
                       Bookdata.map((data,index)=>{
                         return(
-                          <div className='booking-row-data'>
-                            <div className='row'>{data.guestFirstName}</div>
-                            <div className='row'>{data.guestLastName}</div>
-                            <div className='row'>{data.room.roomNumber}</div>
-                            <div className='row'>{data.checkInDate}</div>
-                            <div className='row'>{data.checkOutDate}</div>
-                            <div className='row'>{data.status}</div>
-                              
-
-                          </div>
-
+                          <Databooking data={data} key={index}/>
                         )
                       })
                      }
                     </div>
-                    {/* <div className={booking ? "popwindow":"" }>
-    {booking && <Newbooking/>}
-</div> */}
+                    <div className={booking ? "popwindow":"" }>
+                        {booking && <Newbooking/>}
+                    </div>
                  </div>
             
           

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Input from './Input'
 import Button from './Button'
 import './newbooking.css'
+import { updateStatus } from '../serivce/api'
 // import { useEffect } from 'react'
 import apiCall from '../serivce/apiCall'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
@@ -15,7 +16,7 @@ const Newbooking = ({ title, text }) => {
     checkInDate: "",
     checkOutDate: "",
     numberOfAdults: "",
-    numberOfChild: "",
+    numberOfChildren: "",
     
 
   })
@@ -41,7 +42,7 @@ const [status, setStatus] = useState();
 
 
    useEffect(() => {
-     if (!id)
+     if (!id) return
       
     getBookingdata();
    
@@ -88,7 +89,7 @@ function backclick(){
 
 
 
-  const { guestFirstName, guestLastName, checkInDate, checkOutDate,numberOfAdults,numberOfChild } = bookData
+  const { guestFirstName, guestLastName, checkInDate, checkOutDate,numberOfAdults,numberOfChildren } = bookData
   const onChange = (value, key) => {
     // console.log(value,key);
     if (room) return
@@ -117,7 +118,7 @@ function backclick(){
   }
   const addBooking=()=>apiCall("/booking","POST",{...formatbooking(),roomId:room.id,status:"Booked"})
   const getRooms=()=>apiCall("/get-rooms","POST",formatbooking())
-  const updateStatus = (status)=>apiCall("/booking","PUT",{id:Booking.id,status})
+  // const updateStatus = (status)=>apiCall("/booking","PUT",{id:Booking.id,status})
 
   const [BookNow, setBookNow] = useState(false)
 
@@ -138,7 +139,7 @@ function backclick(){
           <Input title='Check in Date' type='date' setstate={v => onChange(v, "checkInDate")} value={checkInDate} />
           <Input title='Check out Date' type='date' setstate={v => onChange(v, "checkOutDate")} value={checkOutDate} />
           <Input title='Adult Capacity' type='number'  setstate={v => onChange(v, "numberOfAdults")} value={numberOfAdults}/>
-          <Input title='ChildCapacity' type='number'  setstate={v => onChange(v, "numberOfChild")} value={numberOfChild} />
+          <Input title='ChildCapacity' type='number'  setstate={v => onChange(v, "numberOfChildren")} value={numberOfChildren} />
             {ShowRoom && <div className='newbooking-label'><label>RoomNumber:</label>{room.roomNumber}<label> Price:</label>{room.price}</div>}
           <div className='newbooking-btn' >
             <div className='newbooking-btn-booking'><Button color='white' text='GET AVALIABLE ROOM' disabled={room}  back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={getAvailable} /></div>
@@ -163,7 +164,7 @@ function backclick(){
               <div><Button color='white' disabled={status !== "Booked"} text='cancel
       ' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={() => { setCheck(!Check) }} /></div>
           </div>  }
-
+      
           </div>
         
         <div>
