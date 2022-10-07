@@ -5,3 +5,6 @@
     display: grid;
     place-items: centre;
 }
+.disabled{
+    opacity: 0.6;
+}

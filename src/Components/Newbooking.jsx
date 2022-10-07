@@ -140,24 +140,28 @@ function backclick(){
           <Input title='Check out Date' type='date' setstate={v => onChange(v, "checkOutDate")} value={checkOutDate} />
           <Input title='Adult Capacity' type='number'  setstate={v => onChange(v, "numberOfAdults")} value={numberOfAdults}/>
           <Input title='ChildCapacity' type='number'  setstate={v => onChange(v, "numberOfChildren")} value={numberOfChildren} />
-            {ShowRoom && <div className='newbooking-label'><label>RoomNumber:</label>{room.roomNumber}<label> Price:</label>{room.price}</div>}
+            { Getavailbleroom && <> <div className='newbooking-label'><label>RoomNumber:</label>{room.roomNumber}<label> Price:</label>{room.price}</div> </>}
+
+
+
           <div className='newbooking-btn' >
             <div className='newbooking-btn-booking'><Button color='white' text='GET AVALIABLE ROOM' disabled={room}  back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={getAvailable} /></div>
-            {
-             Getavailbleroom  && <div className='newbooking-btn-1'> <div className='newbooking-btn-booking'><Button disabled={status} color='white' text='BOOKING' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={book} /></div>
+                     <div className='newbooking-btn-1'> <div className='newbooking-btn-booking'><Button disabled={status} color='white' text='BOOKING' back='#d7ae63' padding="10px" wid='182px' hi='40px' funtionality={book} /></div>
             
             <div><Button color='#d7ae63' text='Back' padding="10px" wid='182px' hi='40px' funtionality={backclick} /></div>
            </div>
-            }
+            
           </div>
+           
 
           <div className='newbooking-btn2'>
             {
-              BookNow && <div className='newbooking-btn2-2'><div><Button disabled={status !== "Booked"} color='white' text='Check In' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{updateStatus("CheckIn")}} /></div>
+              room && 
+              <div className='newbooking-btn2-2'><div><Button disabled={status !== "Booked"} color='white' text='Check In' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{changeStatus("Check In")}} /></div>
             
 
             
-              <div><Button color='white'disabled={status !== "Check In"} text='Check Out' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{updateStatus("CheckOut")}}/></div>
+              <div><Button color='white'disabled={status !== "Check In"} text='Check Out' padding="10px" wid='182px' hi='40px' back='#d7ae63' funtionality={()=>{changeStatus("Check Out")}}/></div>
             
 
             
